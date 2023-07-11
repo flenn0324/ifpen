@@ -13,7 +13,7 @@ const Topbar = () => {
     const colorMode = useContext(ColorModeContext);
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2}> 
+        <Box display="flex" justifyContent="space-between" p={2} sx={{ boxShadow: "rgba(0, 0, 0, 0.08) 0px 4px 12px" }}> 
 
             <Box display="flex" marginLeft="auto">
                 <IconButton onClick={colorMode.toggleColorMode}>

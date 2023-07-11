@@ -69,7 +69,7 @@ const Filtration = () => {
       headerName: "Action",
       flex: 1,
       renderCell: () => (
-        <Button variant="contained" color="success" onClick={handleClickOpen}>
+        <Button variant="contained" color="primary" sx={{ bgcolor: colors.blueAccent[600] }} onClick={handleClickOpen}>
           Consulter
         </Button>
       ),
@@ -120,31 +120,35 @@ const Filtration = () => {
       />
       <SearchComponent onSearch={handleSearch} hideInput={false} />
       <Box
-        m="40px 0 0 0"
+        mx={4} my={5}
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
           },
           "& .MuiDataGrid-toolbarContainer": {
-            backgroundColor: colors.bleuAccent[600],
+            backgroundColor: colors.blueAccent[700],
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+            mb: 0.5
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
           },
           "& .name-column--cell": {
-            color: colors.greenAccent[100],
+            color: colors.greenAccent[300],
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.bleuAccent[900],
+            backgroundColor: colors.blueAccent[800],
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[900],
+            backgroundColor: theme.palette.mode === "dark" ? colors.primary[800] : colors.blueAccent[900],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.bleuAccent[900],
+            backgroundColor: colors.blueAccent[800],
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
@@ -158,60 +162,6 @@ const Filtration = () => {
           {...mockDataTeam}
           slots={{ toolbar: GridToolbar }}
         />
-
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle
-              sx={{
-                backgroundColor: "blue",
-                color: "white",
-                fontSize: "20px",
-                fontWeight: "bold",
-              }}
-            >
-              Action
-            </DialogTitle>
-
-            <DialogContent sx={{ width: "800px" }}>
-              <Box>
-                <Grid container spacing={3}>
-                  <Grid item>
-                    <List disablePadding>
-                      {infoAction.map((info) => (
-                        <ListItem key={info.name} sx={{ py: 1, px: 0 }}>
-                          <ListItemText
-                            primaryTypographyProps={{
-                              variant: "h6",
-                              fontWeight: "bold",
-                            }}
-                            primary={info.name}
-                            secondary={
-                              <>
-                                {info.desc}
-                                {info.name === "Chercheur :" && (
-                                  <div style={{ marginTop: "10px" }}>
-                                    <a
-                                      href={info.lien}
-                                      style={{ color: "lightblue" }}
-                                    >
-                                      Voir la fiche d'identité
-                                    </a>
-                                  </div>
-                                )}
-                              </>
-                            }
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </Grid>
-                </Grid>
-              </Box>
-            </DialogContent>
-
-            <DialogActions>
-              <Button onClick={handleClose}>Fermer</Button>
-            </DialogActions>
-          </Dialog> 
       </Box>
     </Box>
   );

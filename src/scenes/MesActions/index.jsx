@@ -14,7 +14,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import {Grid} from "@mui/material";
+import { Grid } from "@mui/material";
 
 
 const MesActions = () => {
@@ -65,7 +65,7 @@ const MesActions = () => {
       headerName: "Action",
       flex: 1,
       renderCell: () => (
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        <Button variant="contained" color="primary" sx={{ bgcolor: colors.blueAccent[600] }} onClick={handleClickOpen}>
           Consulter
         </Button>
       ),
@@ -109,16 +109,20 @@ const MesActions = () => {
   return (
     <Box m="20px">
       <Header title="Mes Actions Extérieurs" subtitle="Liste de mes marqueurs de rayonnement scientifique" />
-          <SearchComponent onSearch={handleSearch} hideInput={true} />
+      <SearchComponent onSearch={handleSearch} hideInput={true} />
       <Box
-        m="40px 0 0 0"
+        mx={4} my={5}
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
           },
           "& .MuiDataGrid-toolbarContainer": {
-            backgroundColor: colors.greenAccent[300],
+            backgroundColor: colors.blueAccent[700],
+          },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+            mb: 0.5
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
@@ -127,57 +131,57 @@ const MesActions = () => {
             color: colors.greenAccent[300],
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.bleuAccent[700],
+            backgroundColor: colors.blueAccent[800],
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
+            backgroundColor: theme.palette.mode === "dark" ? colors.primary[800] : colors.blueAccent[900],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.bleuAccent[700],
+            backgroundColor: colors.blueAccent[800],
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} {...mockDataTeam}  slots={{ toolbar: GridToolbar }}/>
+        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} {...mockDataTeam} slots={{ toolbar: GridToolbar }} />
       </Box>
 
-      <div>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle sx={{ backgroundColor: 'blue', color: 'white' , fontSize: '20px', fontWeight: 'bold'}}>
-          Action
-          <div style={{ position: 'absolute', right: 0, top: 0 }}>
-            <Button variant="outlined" color="primary" style={{ margin: '10px' }}>Modifier</Button>
-            <Button variant="outlined" color="secondary" style={{ margin: '10px' }}>Supprimer</Button>
-          </div>
-        </DialogTitle>
-        <DialogContent sx={{ width: '800px' }}>
       <Box>
-      <Grid container spacing={3}>
-        <Grid item>
-          <List disablePadding>
-            {infoAction.map((info) => (
-            <ListItem key={info.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText
-            primaryTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
-            primary={info.name}
-            secondary={info.desc}
-           />
-          </ListItem>
-          ))}
-          </List>
-        </Grid>
-      </Grid>
-    </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle sx={{ backgroundColor: colors.blueAccent[600], color: 'white', fontSize: '20px', fontWeight: 'bold' }}>
+            Action
+            <Box style={{ position: 'absolute', right: 0, top: 0 }}>
+              <Button variant="contained" color="secondary" >Modifier</Button>
+              <Button variant="contained" color="error" style={{ margin: '15px' }}>Supprimer</Button>
+            </Box>
+          </DialogTitle>
+          <DialogContent sx={{ width: '800px' }}>
+            <Box mt={2} >
+              <Grid container spacing={3}>
+                <Grid item>
+                  <List disablePadding>
+                    {infoAction.map((info) => (
+                      <ListItem key={info.name} sx={{ py: 1, px: 0 }}>
+                        <ListItemText
+                          primaryTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
+                          primary={info.name}
+                          secondary={info.desc}
+                        />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Grid>
+              </Grid>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
     </Box>
 
   );
